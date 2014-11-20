@@ -1,5 +1,4 @@
-default['le_rsyslog']['logentries']['token'] = '00000000-0000-0000-0000-000000000000'
 default['le_rsyslog']['logentries']['logs'] =
-    [ {:syslog => '/var/log/syslog'},
-      {:messages => '/var/log/messages'} ]
+    [ {:name => 'alpha', :log => '/var/log/alpha', :token => 'logentries_token'},
+      {:name => 'beta', :log => '/var/log/beta', :token => 'logentries_token'} ]
 

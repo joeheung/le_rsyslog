@@ -17,15 +17,9 @@ This cookbook should be used as a wrapper cookbook which will set up rsyslog to 
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['le_rsyslog']['logentries']['token']</tt></td>
-    <td>String</td>
-    <td>logentries TCP token</td>
-    <td><tt>None</tt></td>
-  </tr>
-  <tr>
     <td><tt>['le_rsyslog']['logentries']['logs']</tt></td>
     <td>Array of objects</td>
-    <td>logname => absolute position of log to follow</td>
+    <td>name => name of log, log => absolute position of log to follow, token => logentries TCP token to send this log to</td>
     <td><tt>None</tt></td>
   </tr>
 </table>

@@ -4,19 +4,17 @@ $Modload imfile
 $InputFilePollInterval 1
 
 <% node['le_rsyslog']['logentries']['logs'].each do |syslog| -%>
-<% syslog.each do |name, log| -%>
-
-$InputFileName <%= log %>
-$InputFileTag <%= name %>
-$InputFileStateFile <%= name %>-state
+$InputFileName <%= syslog[:log] %>
+$InputFileTag <%= syslog[:name] %>
+$InputFileStateFile <%= syslog[:name] %>-state
 $InputFileSeverity info
 $InputFileFacility local7
 $InputRunFileMonitor
 
 
-$template <%= name %>-template,"<%= node['le_rsyslog']['logentries']['token']%> %HOSTNAME% %syslogtag%%msg%\n"
+$template <%= syslog[:name] %>-template,"<%= syslog[:token]%> %HOSTNAME% %syslogtag% %msg%\n"
 
-if $programname == '<%= name %>' then @@data.logentries.com:10000;<%= name %>-template
+if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:10000;<%= syslog[:name] %>-template
 & ~
-<% end -%>
+
 <% end -%>
