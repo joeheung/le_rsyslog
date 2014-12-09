@@ -12,7 +12,7 @@ service 'rsyslog' do
   action :nothing
 end
 
-template '/etc/rsyslog.d/logentries.conf' do
+template '/etc/rsyslog.d/5-logentries.conf' do
   source 'logentries.conf.erb'
   owner     'root'
   group     'root'
