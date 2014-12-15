@@ -22,6 +22,18 @@ This cookbook should be used as a wrapper cookbook which will set up rsyslog to 
     <td>name => name of log, log => absolute position of log to follow, token => logentries TCP token to send this log to</td>
     <td><tt>None</tt></td>
   </tr>
+  <tr>
+    <td><tt>['le_rsyslog']['logentries']['ssl']</tt></td>
+    <td>Boolean</td>
+    <td>send logs to logentries via SSL</td>
+    <td><tt>true</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['le_rsyslog']['logentries']['ssl_dir']</tt></td>
+    <td>Boolean</td>
+    <td>location for logentries cert</td>
+    <td><tt>/opt/ssl</tt></td>
+  </tr>
 </table>
 
 ## Usage

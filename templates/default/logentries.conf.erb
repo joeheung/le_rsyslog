@@ -1,4 +1,12 @@
 $Modload imfile
+<% if node['le_rsyslog']['logentries']['ssl'] -%>
+$DefaultNetstreamDriverCAFile <%= File.join(node['le_rsyslog']['logentries']['ssl_dir'], 'data.logentries.cert') %>
+
+$ActionSendStreamDriver gtls
+$ActionSendStreamDriverMode 1
+$ActionSendStreamDriverAuthMode x509/name
+$ActionSendStreamDriverPermittedPeer data.logentries.com
+<% end -%>
 
 # Only entered once in case of following multiple files
 $InputFilePollInterval 1
@@ -13,8 +21,11 @@ $InputRunFileMonitor
 
 
 $template <%= syslog[:name] %>-template,"<%= syslog[:token]%> %HOSTNAME% %syslogtag% %msg%\n"
-
+<% if node['le_rsyslog']['logentries']['ssl'] -%>
+if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:20000;<%= syslog[:name] %>-template
+<% else -%>
 if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:10000;<%= syslog[:name] %>-template
+<% end -%>
 & ~
 
 <% end -%>
