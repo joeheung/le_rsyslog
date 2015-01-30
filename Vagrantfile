@@ -20,9 +20,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = ['/Users/jheung/repos/lechef/cookbooks','/Users/jheung/repos/joeheung/']
+    chef.cookbooks_path = ['.']
     chef.run_list = [
         'recipe[le_rsyslog::default]'
     ]
+    chef.json = {
+        :le_rsyslog => {
+            :datahub => {
+                :enabled => true,
+                :ip => "127.0.0.1",
+                :port => 10000
+            }
+        }
+    }
   end
 end
