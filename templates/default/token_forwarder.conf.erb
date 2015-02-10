@@ -1,0 +1,20 @@
+<%# TODO: check erarlier rsyslog configs to avoid redundant loads (which are an error for some reason) -%>
+module(load="imtcp")
+module(load="imudp")
+module(load="omprog")
+
+ruleset (name="translate_to_tokens"){
+  action(type="omprog" binary="<%= @tokenizer.path %>" template="<%=@tokenizer.input_template %>")
+}
+
+input(type="imtcp" port="<%= @listener.port %>" ruleset="translate_to_tokens")
+
+<%# TODO: if @forwarder.host is a local ip...  else none -%>
+template(name="Verbatim" type="string" string="%rawmsg%")
+
+ruleset (name="forward_to_logentries"){
+  action(type="omfwd" Target="data.logentries.com" Port="10000" Protocol="tcp" Template="Verbatim")
+}
+
+input(type="imudp" address="<%= @forwarder.host %>" port="<%= @forwarder.port %>" ruleset="forward_to_logentries")
+<%# end-TODO-if -%>

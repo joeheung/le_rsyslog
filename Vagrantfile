@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = ['.']
     chef.run_list = [
-        'recipe[le_rsyslog::default]'
+        'recipe[le_rsyslog::tokenizer_forwarder]'
     ]
     chef.json = {
         :le_rsyslog => {
