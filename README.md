@@ -34,6 +34,24 @@ This cookbook should be used as a wrapper cookbook which will set up rsyslog to 
     <td>location for logentries cert</td>
     <td><tt>/opt/ssl</tt></td>
   </tr>
+  <tr>
+    <td><tt>['le_rsyslog']['datahub']['enabled']</tt></td>
+    <td>Boolean</td>
+    <td>whether to use datahub or not</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['le_rsyslog']['datahub']['ip']</tt></td>
+    <td>String</td>
+    <td>Location of Datahub host</td>
+    <td><tt>127.0.0.1</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['le_rsyslog']['datahub']['port']</tt></td>
+    <td>Integer</td>
+    <td>Datahub port to connect to</td>
+    <td><tt>10000</tt></td>
+  </tr>
 </table>
 
 ## Usage
@@ -50,6 +68,11 @@ Include `le_rsyslog` in your node's `run_list`:
 }
 ```
 
-## License and Authors
+License and Author
+------------------
 
-Author:: Joe Heung (<joe@joeheung.com>)
+* Author:: Joe Heung (<joe.heung@logentries.com>)
+
+Copyright (C) 2015, RevelOps Inc.
+
+License:: All rights reserved

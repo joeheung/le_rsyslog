@@ -4,3 +4,7 @@ default['le_rsyslog']['logentries']['logs'] =
 
 default['le_rsyslog']['logentries']['ssl'] = true
 default['le_rsyslog']['logentries']['ssl_dir'] = '/opt/ssl'
+
+default['le_rsyslog']['datahub']['enabled'] = false
+default['le_rsyslog']['datahub']['ip'] = '127.0.0.1'
+default['le_rsyslog']['datahub']['port'] = 10000
