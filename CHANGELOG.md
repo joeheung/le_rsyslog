@@ -1,3 +1,7 @@
+# 0.1.4
+
+Update SSL support for new Logentries certificates/ports.
+
 # 0.1.3
 
 Added datahub support
