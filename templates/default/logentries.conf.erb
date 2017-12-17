@@ -1,6 +1,6 @@
 $Modload imfile
 <% if node['le_rsyslog']['logentries']['ssl'] -%>
-$DefaultNetstreamDriverCAFile <%= File.join(node['le_rsyslog']['logentries']['ssl_dir'], 'data.logentries.cert') %>
+$DefaultNetstreamDriverCAFile /etc/ssl/certs/ca-certificates.crt
 
 $ActionSendStreamDriver gtls
 $ActionSendStreamDriverMode 1
@@ -24,9 +24,9 @@ if $programname == '<%= syslog[:name] %>' then @@<%= node['le_rsyslog']['datahub
 <% else -%>
 $template <%= syslog[:name] %>-template,"<%= syslog[:token]%> %HOSTNAME% %syslogtag% %msg%\n"
 <% if node['le_rsyslog']['logentries']['ssl'] -%>
-if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:20000;<%= syslog[:name] %>-template
+if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:443;<%= syslog[:name] %>-template
 <% else -%>
-if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:10000;<%= syslog[:name] %>-template
+if $programname == '<%= syslog[:name] %>' then @@data.logentries.com:80;<%= syslog[:name] %>-template
 <% end -%>
 <% end -%>
 & STOP
